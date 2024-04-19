@@ -6,10 +6,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml\* ./
 
-RUN \
-    if [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
-    else echo "PNPM lockfile not found." && exit 1; \
-    fi
+RUN yarn global add pnpm && pnpm i
 
 ##### BUILDER
 
@@ -20,7 +17,7 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn global add pnpm@8.15.4 && SKIP_ENV_VALIDATION=1 pnpm run build;
+RUN yarn global add pnpm && SKIP_ENV_VALIDATION=1 pnpm run build;
 RUN node scripts/build.mjs;
 
 ##### RUNNER
