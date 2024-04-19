@@ -20,7 +20,7 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn global add pnpm && SKIP_ENV_VALIDATION=1 pnpm run build;
+RUN yarn global add pnpm@8.15.4 && SKIP_ENV_VALIDATION=1 pnpm run build;
 RUN node scripts/build.mjs;
 
 ##### RUNNER
